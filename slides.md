@@ -27,10 +27,12 @@
 * What is Angular 2?
 * Why Angular 2?
 * Component Model Architecture
-* What is a Component?
-* Input/Output
-* Routing
-* Upgrade Paths
+* Events
+* Services/Injectables
+* ngFor
+* Inputs
+* ngClass
+* ngModel
 
 ---
 
@@ -70,7 +72,7 @@ export class MyComponent {
 
 ---
 
-## Lets Build a Todo App
+## Build a Todo App
 
 ---
 
@@ -221,7 +223,7 @@ import { TodoService } from './todo-service'
 
 ---
 
-### Lets connect Service to Input - todo-input.ts
+### Connect Service to Input - todo-input.ts
 
 ```
 import { Component, Inject } from 'angular2/core'
@@ -244,7 +246,7 @@ import { TodoService } from './todo-service'
 
 ---
 
-### Lets create a TodoModel - todo-model.ts
+### Create a TodoModel - todo-model.ts
 
 ```
 export class TodoModel {
@@ -275,7 +277,7 @@ import { TodoModel } from './todo-model'
 
 ---
 
-### Lets create a TodoItem Component - todo-item.ts
+### Create a TodoItem Component - todo-item.ts
 
 ```
 import {Component, Input} from 'angular2/core'
@@ -294,7 +296,7 @@ export class TodoItem {
 
 ---
 
-### Lets add TodoItem Component to List - todo-list.ts
+### Add TodoItem Component to List - todo-list.ts
 
 ```
 import {TodoItem} from './todo-item'
@@ -311,7 +313,7 @@ import {TodoItem} from './todo-item'
 
 ---
 
-### ngClass and Todo.toggle - todo-item.ts
+### ngClass - todo-item.ts
 
 ```
   template: `
@@ -329,7 +331,7 @@ import {TodoItem} from './todo-item'
 
 ---
 
-### TodoModel map to TodoInput - todo-input.ts
+### TodoModel to TodoInput - todo-input.ts
 
 ```
 import {TodoModel} from './todo-model'
@@ -348,8 +350,145 @@ onSubmit($event) {
 
 ---
 
-### Bonus: Add HTTP to TodoService
+### Bonus1: HTTP - todo-service.js
 
 ---
 
-### Bonus2: Write a simple Test
+### Step 1 - index.html
+
+```
+<script src="https://code.angularjs.org/2.0.0-beta.9/http.dev.js"></script>
+```
+
+---
+
+### Step 2 - main.ts
+
+```
+import {HTTP_PROVIDERS} from 'angular2/http'
+
+bootstrap(AppComponent, [TodoService, HTTP_PROVIDERS])
+```
+
+---
+
+### Step 3a - todo-services.ts
+
+```
+export class TodoService {
+  todos;
+  http;
+  constructor(@Inject(Http) http) {
+    this.http = http
+    this.loadDocs()
+  }
+  loadDocs() {
+    this.http.get('https://pouchdb.herokuapp.com/todos/_all_docs?include_docs=true')
+      .subscribe(res => {
+        this.todos = res.json().rows.map( r => {
+          const todo = new TodoModel(r.doc.title)
+          todo.status = r.doc.status
+          todo._id = r.doc._id
+          todo._rev = r.doc._rev
+          return todo
+        })
+      })
+  }
+...
+}
+```
+
+---
+
+### Step 3b - todo-services.ts
+
+```
+addTodo(todo) {
+  const todoJSON = JSON.stringify({title: todo.title, status: todo.status})
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  this.http.post('https://pouchdb.herokuapp.com/todos', todoJSON, {
+    headers
+  })
+    .subscribe(res => {
+      if (res.json().ok) {
+        this.loadDocs()
+      }
+    })
+}
+```
+
+---
+
+### Step 3c - todo-services.ts
+
+```
+updateTodo(todo) {
+  const todoJSON = JSON.stringify({
+    _id: todo._id,
+    _rev: todo._rev,
+    title: todo.title,
+    status: todo.status})
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  this.http.put('https://pouchdb.herokuapp.com/todos/' + todo._id, todoJSON, {
+    headers: headers
+  })
+    .subscribe(res => {
+      if (res.json().ok) {
+        this.loadDocs()
+      }
+    })
+}
+```
+
+---
+
+### Step 3d - todo-service.ts
+
+```
+removeCompleted() {
+  const completed = this.todos
+    .filter(todo => todo.status === 'completed')
+    .map(todo => {
+      todo._deleted = true
+      return todo
+    })
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  const completedJSON = JSON.stringify({ docs: completed})
+  this.http.post('https://pouchdb.herokuapp.com/todos/_bulk_docs', completedJSON, {
+    headers
+  })
+    .subscribe(res => {
+      this.loadDocs()
+    })
+}
+```
+
+---
+
+### Step 4 - todo-list
+
+```
+@Component({
+  selector: 'todo-list',
+  directives: [TodoItem],
+  template: `
+    <ul>
+      <li *ngFor="#todo of todoService.todos">
+        <todo-item [todo]="todo" (update)="updateTodo(todo)"></todo-item>
+      </li>
+    </ul>
+    <button (click)="todoService.removeCompleted()">Remove Completed</button>
+  `
+})
+...
+```
+
+---
+
+### Bonus2: Routing
