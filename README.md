@@ -1,5 +1,7 @@
 # Angular 2 - Great Wide Open 2016
 
+http://greatwideopen.org/
+
 This repo contains the slides for the Angular 2 talk at Great Wide Open Conference
 in Atlanta.
 
