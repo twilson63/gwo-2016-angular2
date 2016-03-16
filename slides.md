@@ -1,4 +1,4 @@
-!http://i1-news.softpedia-static.com/images/news2/angularjs-2-roadmap-update-es5-es6-and-typescript-support-485375-2.jpg
+! https://rawgit.com/twilson63/gwo-talk-2016/master/ng2-view.jpg
 
 ---
 
