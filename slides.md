@@ -1,4 +1,4 @@
-! https://rawgit.com/twilson63/gwo-talk-2016/master/ng2-view.jpg
+! https://rawgit.com/twilson63/gwo-2016-angular2/master/ng2-view.jpg
 
 ---
 
