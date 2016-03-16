@@ -283,7 +283,7 @@ export class TodoModel {
 
 ---
 
-### Add the model to the Service - todo-service.ts
+### Add Model to Svc - todo-service.ts
 
 ```
 import { TodoModel } from './todo-model'
@@ -296,7 +296,7 @@ import { TodoModel } from './todo-model'
 
 ---
 
-### Create a TodoItem Component - todo-item.ts
+### Create a TodoItem - todo-item.ts
 
 ```
 import {Component, Input} from 'angular2/core'
@@ -315,7 +315,7 @@ export class TodoItem {
 
 ---
 
-### Add TodoItem Component to List - todo-list.ts
+### Add TodoItem to List - todo-list.ts
 
 ```
 import {TodoItem} from './todo-item'
@@ -510,4 +510,52 @@ removeCompleted() {
 
 ---
 
-### Bonus2: Routing
+### Bonus2: Routing - app.js
+
+```
+// index.html
+<head>
+  <base href="/">
+</head>
+<body>
+...
+<script src="https://code.angularjs.org/2.0.0-beta.9/router.dev.js"></script>
+</body>
+```
+
+---
+
+### Router Step 2
+
+```
+// app.ts
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
+
+@Component({
+  directives: [ROUTER_DIRECTIVES],
+  providers: [
+    ROUTER_PROVIDERS
+  ],
+  template: `
+  <h1>Title</h1>
+  <nav>
+    <a [routerLink]="['Home']">Home</a>
+    <a [routerLink]="['About']">About</a>
+  </nav>
+  <router-outlet></router-outlet>
+  `
+})
+@RouteConfig([{
+  path: '/',
+  name: 'Home',
+  component: HomeComponent  
+}, {
+  path: '/about',
+  name: 'About',
+  component: AboutComponent
+}])
+export class App {
+
+}
+
+```
