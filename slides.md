@@ -48,7 +48,7 @@ The framework is faster, more scalable, and more modern. Chances are that organi
 
 ---
 
-# Component Model Architecture
+### Component Model Architecture
 
 ```
 <TodoApp>
@@ -77,7 +77,7 @@ export class MyComponent {
 
 ---
 
-# A Todo App
+### A Todo App
 
 ```
 <TodoApp>
@@ -126,6 +126,9 @@ A new name for filters and work very similar:
 {{todos | json}}
 ```
 
+date, json, currency, uppercase, limitTo, lowercase, decimal, percent, async
+
+Async Pipes are supported.
 ---
 
 ### ngFor
@@ -203,13 +206,22 @@ With ngClass you can modify the presentation with expressions
 
 ---
 
+### TodoInput
+
+```
+this.todoService.todos.push(this.todo)
+this.todo = new TodoModel('')
+```
+
+---
+
 ### Custom events with EventEmitter
 
 ```
 <todo-item (update)="update(todo)"></todo-item>
 ...
 export class TodoItem {
-  update = new EventEmitter()
+  @Output() update = new EventEmitter()
   onUpdate() {
     update.emit('event')
   }
