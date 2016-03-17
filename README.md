@@ -11,6 +11,10 @@ You can see an example of the application here:
 
 http://tnw-todo-app.jsplay.space
 
+You can walk through the steps to build this app using
+
+[/steps.md](/steps.md)
+
 License
 
 MIT
