@@ -18,7 +18,7 @@
 
 ---
 
-! https://raw.githubusercontent.com/twilson63/gwo-2016-angular2/master/Angular2.jpg
+! https://raw.githubusercontent.com/twilson63/gwo-2016-angular2/master/Angular2.png
 
 ---
 
