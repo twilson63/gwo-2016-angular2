@@ -233,3 +233,17 @@ The router is another provider and set of directives to create linkable componen
 	`
 })
 ```
+
+---
+
+# Questions
+
+---
+
+### Thank You
+
+http://gwo-2016.jsplay.space/
+
+https://github.com/twilson63/gwo-2016-angular2
+
+---
