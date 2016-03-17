@@ -18,7 +18,7 @@
 
 ---
 
-## Disclaimer/Perspective
+! https://raw.githubusercontent.com/twilson63/gwo-2016-angular2/master/Angular2.jpg
 
 ---
 
@@ -36,29 +36,36 @@
 
 ---
 
-# What is Angular 2?
+### What is Angular 2?
+
+One Framework for Mobile and Desktop
 
 ---
 
-## One Framework for Mobile and Desktop
+### Why Angular 2?
 
----
-
-# Why Angular 2?
-
----
-
-### The framework is faster, more scalable, and more modern. Chances are that organizations that found value in Angular 1.x will find more value in Angular 2.
+The framework is faster, more scalable, and more modern. Chances are that organizations that found value in Angular 1.x will find more value in Angular 2.
 
 ---
 
 # Component Model Architecture
 
+```
+<TodoApp>
+  <TodoInput></TodoInput>
+  <TodoList>
+    <TodoItem></TodoItem>
+  </TodoList>
+</TodoApp>
+```
+
 ---
 
-### What is a component in Angular 2
+### Angular 2 Component
 
 ```
+import {Component} from 'angular2/core'
+
 @Component({
   selector: 'my-component',
   template: '<h1>Component</h1>'
@@ -72,19 +79,26 @@ export class MyComponent {
 
 # A Todo App
 
+```
+<TodoApp>
+  <TodoInput></TodoInput>
+  <TodoList>
+    <TodoItem></TodoItem>
+  </TodoList>
+</TodoApp>
+```
+
 ---
 
 ### Component and Template
 
-In angular2 the template can be included within the component annotation or
-can be a html file path using the `templateUrl` node.
+In angular2 the template can be included within the component annotation or can be a html file path using the `templateUrl` node.
 
 ---
 
 ### Event Handlers
 
-Using the property name you want to handle assigned to an expression. The
-'()' indicates event handler.
+Using the property name you want to handle assigned to an expression. The '()' indicates event handler.
 
 ```
 <button (click)="onClick()">Click Me!</button>
@@ -144,9 +158,9 @@ export class TodoService {
 ngModel established two-way data-binding using both the '[]' and '()'
 
 ```
-  <form (submit)="onSubmit($event)">
-    <input type="text" [(ngModel)]="todo.title">
-  </form>
+<form (submit)="onSubmit($event)">
+  <input type="text" [(ngModel)]="todo.title">
+</form>
 ```
 
 ---
@@ -186,6 +200,7 @@ With ngClass you can modify the presentation with expressions
 </style>
 <span [ngClass]="todo.status">{{todo.title}}</span>
 ```
+
 ---
 
 ### Custom events with EventEmitter
