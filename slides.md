@@ -56,9 +56,7 @@
 
 ---
 
-## What is a component in Angular 2
-
----
+### What is a component in Angular 2
 
 ```
 @Component({
@@ -72,30 +70,18 @@ export class MyComponent {
 
 ---
 
-## Build a Todo App
+# A Todo App
 
 ---
 
-You can either start with
-
-http://angular2.jsplay.space
-
-or
-
-http://angular2.io Getting Started App
-
----
-
-# Component and Template
-
----
+### Component and Template
 
 In angular2 the template can be included within the component annotation or
 can be a html file path using the `templateUrl` node.
 
 ---
 
-# Event Handlers
+### Event Handlers
 
 Using the property name you want to handle assigned to an expression. The
 '()' indicates event handler.
@@ -128,7 +114,7 @@ A new name for filters and work very similar:
 
 ---
 
-# ngFor
+### ngFor
 
 Then new ng-repeat - or structural directive
 
@@ -140,7 +126,7 @@ Then new ng-repeat - or structural directive
 
 ---
 
-# Services and Providers
+### Services and Providers
 
 A service is just a class or function with Injectable decorator
 
@@ -153,7 +139,7 @@ export class TodoService {
 
 ---
 
-# ngModel
+### ngModel
 
 ngModel established two-way data-binding using both the '[]' and '()'
 
@@ -165,7 +151,7 @@ ngModel established two-way data-binding using both the '[]' and '()'
 
 ---
 
-# Models with ES6 and TypeScript
+### Models
 
 You can define and implement models easier with ES6 and TypeScript
 
@@ -177,7 +163,7 @@ export class TodoModel {
 
 ---
 
-# Inputs
+### Inputs
 
 You can create inputs that enable values to be passed down from parent
 components via '[]' properties.
@@ -188,7 +174,7 @@ components via '[]' properties.
 
 ---
 
-# ngClass directive
+### ngClass directive
 
 With ngClass you can modify the presentation with expressions
 
@@ -202,7 +188,7 @@ With ngClass you can modify the presentation with expressions
 ```
 ---
 
-# Custom events with EventEmitter
+### Custom events with EventEmitter
 
 ```
 <todo-item (update)="update(todo)"></todo-item>
@@ -217,7 +203,7 @@ export class TodoItem {
 
 ---
 
-# Http Provider
+### Http Provider
 
 The Http provider returns Rx Observables.
 
@@ -230,7 +216,7 @@ http.get('/foo.json')
 
 ---
 
-# Router
+### Router
 
 The router is another provider and set of directives to create linkable components.
 
